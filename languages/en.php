@@ -16,13 +16,13 @@ $lang = [
     'visit_website' => 'Visit Website',
     
     // Homepage
-    'home_title' => 'Home - AidVeritas',
+    'home_title' => 'Home - Micro-Donations Management',
     'how_it_works' => 'How It Works',
     'simple_steps' => 'Three simple steps for verifiable donations',
     'download_app' => 'Download App',
-    'step1_desc' => 'Download the AidVeritas app and create your secure profile',
+    'step1_desc' => 'Download the Micro-Donations Management app and create your secure profile',
     'scan_qr' => 'Scan QR Code',
-    'step2_desc' => 'Scan the QR code on AidVeritas terminal in partner stores',
+    'step2_desc' => 'Scan the QR code on Micro-Donations Management terminal in partner stores',
     'donate_receive' => 'Donate & Receive',
     'step3_desc' => 'Insert your change and receive consolidated annual tax receipts',
     'featured_charities' => 'Featured Charities',
@@ -63,9 +63,9 @@ $lang = [
     'team' => 'Our Team',
     
     // Add these missing translations for page content:
-    'about_mission_text' => 'AidVeritas was created to solve a fundamental problem in the charitable ecosystem: the opacity of traditional physical donations.',
+    'about_mission_text' => 'Micro-Donations Management was created to solve a fundamental problem in the charitable ecosystem: the opacity of traditional physical donations.',
     'about_vision_text' => 'Our platform transforms anonymous coin donations into verifiable, attributed digital transactions, ensuring every donor receives recognition and tax benefits.',
     'contact_info' => 'We\'re here to help. Contact us with any questions.',
-    'resources_description' => 'Guides, documentation and resources for using AidVeritas',
+    'resources_description' => 'Guides, documentation and resources for using Micro-Donations Management',
 ];
 ?>

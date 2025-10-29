@@ -16,13 +16,13 @@ $lang = [
     'visit_website' => 'Visiter le site',
     
     // Homepage
-    'home_title' => 'Accueil - AidVeritas',
+    'home_title' => 'Accueil - GestionMicro-Dons',
     'how_it_works' => 'Comment ça marche',
     'simple_steps' => 'Trois étapes simples pour des dons vérifiables',
     'download_app' => 'Téléchargez l\'app',
-    'step1_desc' => 'Téléchargez l\'application AidVeritas et créez votre profil sécurisé',
+    'step1_desc' => 'Téléchargez l\'application GestionMicro-Dons et créez votre profil sécurisé',
     'scan_qr' => 'Scannez le QR code',
-    'step2_desc' => 'Scannez le code QR sur le terminal AidVeritas dans les magasins partenaires',
+    'step2_desc' => 'Scannez le code QR sur le terminal GestionMicro-Dons dans les magasins partenaires',
     'donate_receive' => 'Donnez et recevez',
     'step3_desc' => 'Insérez votre monnaie et recevez un reçu fiscal annuel consolidé',
     'featured_charities' => 'Organismes de bienfaisance en vedette',

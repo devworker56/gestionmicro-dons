@@ -1,211 +1,209 @@
-<?php
-require_once 'includes/config.php';
-require_once 'includes/database.php';
-
-$page_title = $lang['home_title'];
-$current_page = 'home';
-
-// Get featured charities for homepage
-$db = new Database();
-$conn = $db->getConnection();
-
-$featured_charities = [];
-if ($conn) {
-    $stmt = $conn->prepare("
-        SELECT c.*, u.charity_website 
-        FROM charities c 
-        LEFT JOIN users u ON c.user_id = u.id 
-        WHERE c.is_approved = TRUE 
-        ORDER BY c.created_at DESC 
-        LIMIT 6
-    ");
-    $stmt->execute();
-    $featured_charities = $stmt->fetchAll();
-}
-?>
-
 <!DOCTYPE html>
-<html lang="<?php echo $current_language; ?>">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $page_title . ' - ' . SITE_NAME; ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <title>Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #7f8c8d;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        .notify-form {
+            margin: 2rem 0;
+        }
+
+        .notify-input {
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 250px;
+            margin-right: 0.5rem;
+        }
+
+        .notify-btn {
+            padding: 0.8rem 1.5rem;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .notify-btn:hover {
+            background: #34495e;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #7f8c8d;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .countdown {
+                gap: 0.5rem;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+                padding: 0.8rem;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+            
+            .notify-input {
+                width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
-
-    <!-- Main Banner -->
-    <section class="main-banner">
-        <div class="container">
-            <div class="row align-items-center min-vh-50">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold text-primary mb-4">GestionMicro-Dons</h1>
-                    <?php if ($current_language === 'fr'): ?>
-                        <p class="lead mb-4">GestionMicro-Dons transforme votre monnaie en dons vérifiables. Nous consolidons vos dons annuels en un seul reçu fiscal, vous permettant de réclamer votre crédit, tout en garantissant que les organismes de bienfaisance reçoivent un soutien entièrement attribué et de confiance.</p>
-                    <?php else: ?>
-                        <p class="lead mb-4">GestionMicro-Dons turns your spare change into verifiable donations. We consolidate your annual giving into a single tax receipt, so you can claim your credit, while ensuring charities receive fully attributed, trusted support.</p>
-                    <?php endif; ?>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <a href="#how-it-works" class="btn btn-primary btn-lg">
-                            <i class="fas fa-play-circle me-2"></i>
-                            <?php echo $lang['how_it_works']; ?>
-                        </a>
-                        <a href="#charities" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-heart me-2"></i>
-                            <?php echo $lang['view_charities']; ?>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <img src="assets/images/donation-terminal.svg" alt="GestionMicro-Dons Terminal" class="img-fluid" style="max-height: 400px;">
-                </div>
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>We're working hard to bring you something amazing. Stay tuned!</p>
+        
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
             </div>
         </div>
-    </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-5 bg-light">
-        <div class="container">
-            <div class="row text-center mb-5">
-                <div class="col">
-                    <h2 class="display-5 fw-bold text-primary mb-3"><?php echo $lang['how_it_works']; ?></h2>
-                    <p class="lead"><?php echo $lang['simple_steps']; ?></p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                                <i class="fas fa-mobile-alt fa-2x"></i>
-                            </div>
-                            <h4 class="fw-bold">1. <?php echo $lang['download_app']; ?></h4>
-                            <p class="text-muted"><?php echo $lang['step1_desc']; ?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                                <i class="fas fa-qrcode fa-2x"></i>
-                            </div>
-                            <h4 class="fw-bold">2. <?php echo $lang['scan_qr']; ?></h4>
-                            <p class="text-muted"><?php echo $lang['step2_desc']; ?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                                <i class="fas fa-hand-holding-usd fa-2x"></i>
-                            </div>
-                            <h4 class="fw-bold">3. <?php echo $lang['donate_receive']; ?></h4>
-                            <p class="text-muted"><?php echo $lang['step3_desc']; ?></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="notify-form">
+            <form method="POST" action="">
+                <input type="email" class="notify-input" placeholder="Enter your email" required>
+                <button type="submit" class="notify-btn">Notify Me</button>
+            </form>
         </div>
-    </section>
 
-    <!-- Featured Charities Section -->
-    <section id="charities" class="py-5">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col">
-                    <h2 class="display-5 fw-bold text-primary text-center mb-3"><?php echo $lang['featured_charities']; ?></h2>
-                    <p class="lead text-center"><?php echo $lang['charities_desc']; ?></p>
-                </div>
-            </div>
-            
-            <!-- Charity Search -->
-            <div class="row mb-4">
-                <div class="col-md-8 mx-auto">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <form id="charitySearchForm">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-lg" 
-                                           placeholder="<?php echo $lang['search_charities_placeholder']; ?>" 
-                                           id="charitySearch">
-                                    <button class="btn btn-primary btn-lg" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Charity Grid -->
-            <div class="row g-4" id="charityGrid">
-                <?php foreach ($featured_charities as $charity): ?>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card charity-card h-100 shadow-sm">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start mb-3">
-                                <?php if ($charity['logo_url']): ?>
-                                <img src="<?php echo htmlspecialchars($charity['logo_url']); ?>" 
-                                     alt="<?php echo htmlspecialchars($charity['display_name']); ?>" 
-                                     class="charity-logo me-3" style="width: 60px; height: 60px; object-fit: cover;">
-                                <?php else: ?>
-                                <div class="charity-logo-placeholder bg-light rounded d-flex align-items-center justify-content-center me-3" 
-                                     style="width: 60px; height: 60px;">
-                                    <i class="fas fa-heart text-primary"></i>
-                                </div>
-                                <?php endif; ?>
-                                <div>
-                                    <h5 class="card-title fw-bold mb-1"><?php echo htmlspecialchars($charity['display_name']); ?></h5>
-                                    <p class="text-muted small mb-0">BN: <?php echo htmlspecialchars($charity['business_number']); ?></p>
-                                </div>
-                            </div>
-                            <p class="card-text text-muted"><?php echo htmlspecialchars(substr($charity['description'], 0, 120)) . '...'; ?></p>
-                            <div class="charity-category mb-3">
-                                <span class="badge bg-light text-dark"><?php echo htmlspecialchars($charity['category']); ?></span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="<?php echo htmlspecialchars($charity['charity_website'] ?? '#'); ?>" 
-                                   class="btn btn-outline-primary btn-sm" target="_blank">
-                                    <i class="fas fa-external-link-alt me-1"></i>
-                                    <?php echo $lang['visit_website']; ?>
-                                </a>
-                                <small class="text-muted">
-                                    <i class="fas fa-check-circle text-success me-1"></i>
-                                    <?php echo $lang['verified']; ?>
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-
-            <div class="row mt-5">
-                <div class="col text-center">
-                    <a href="charities.php" class="btn btn-primary btn-lg">
-                        <i class="fas fa-list me-2"></i>
-                        <?php echo $lang['view_all_charities']; ?>
-                    </a>
-                </div>
-            </div>
+        <div class="social-links">
+            <a href="#">Facebook</a> • 
+            <a href="#">Twitter</a> • 
+            <a href="#">Instagram</a>
         </div>
-    </section>
+    </div>
 
-    <?php include 'includes/footer.php'; ?>
+    <script>
+        // Set the date we're counting down to (3 months from now)
+        const countDownDate = new Date();
+        countDownDate.setMonth(countDownDate.getMonth() + 3);
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+        // Update the countdown every 1 second
+        const countdownFunction = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            // If the countdown is finished, write some text
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "WE'RE LIVE!";
+            }
+        }, 1000);
+    </script>
 </body>
 </html>

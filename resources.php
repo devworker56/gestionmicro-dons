@@ -54,7 +54,7 @@ $current_page = 'resources';
                                 <li class="mb-2"><i class="fas fa-shield-alt text-primary me-2"></i>Sécurité et confidentialité</li>
                             </ul>
                             <!-- UPDATED: Redirect to docs.aidveritas.com For Donors section -->
-                            <a href="https://docs.aidveritas.com/section.php?id=1" class="btn btn-outline-primary mt-3" target="_blank">
+                            <a href="https://docs.gestionmicrodons.com/section.php?id=1" class="btn btn-outline-primary mt-3" target="_blank">
                                 Voir les guides
                                 <i class="fas fa-external-link-alt ms-2"></i>
                             </a>
@@ -77,7 +77,7 @@ $current_page = 'resources';
                                 <li class="mb-2"><i class="fas fa-file-invoice-dollar text-primary me-2"></i>Gestion des reçus</li>
                             </ul>
                             <!-- UPDATED: Redirect to docs.aidveritas.com For Organizations section -->
-                            <a href="https://docs.aidveritas.com/section.php?id=2" class="btn btn-outline-primary mt-3" target="_blank">
+                            <a href="https://docs.gestionmicrodons.com/section.php?id=2" class="btn btn-outline-primary mt-3" target="_blank">
                                 Documentation
                                 <i class="fas fa-external-link-alt ms-2"></i>
                             </a>
@@ -100,7 +100,7 @@ $current_page = 'resources';
                                 <li class="mb-2"><i class="fas fa-handshake text-primary me-2"></i>Partenariats</li>
                             </ul>
                             <!-- UPDATED: Redirect to docs.aidveritas.com For Businesses section -->
-                            <a href="https://docs.aidveritas.com/section.php?id=3" class="btn btn-outline-primary mt-3" target="_blank">
+                            <a href="https://docs.gestionmicrodons.com/section.php?id=3" class="btn btn-outline-primary mt-3" target="_blank">
                                 Ressources partenaires
                                 <i class="fas fa-external-link-alt ms-2"></i>
                             </a>
